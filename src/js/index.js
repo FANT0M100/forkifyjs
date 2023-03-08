@@ -18,6 +18,10 @@ const contorlSearch = async () => {
 
         //3)clear input value
         searchView.clearInput();
+        
+        //clear searchList
+        searchView.clearResult();
+
         //4)add loader
         renderLoader(elements.searchResList);
         
@@ -25,6 +29,10 @@ const contorlSearch = async () => {
             await state.search.getResults();
             //5)clear loader
             clerLoader();
+
+            //render recipe UI
+            searchView.renderResult(state.search.result)
+
         } catch (error) {
             alert('Error Search');
         }
