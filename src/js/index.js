@@ -53,3 +53,8 @@ elements.searchResPage.addEventListener('click', (e) => {
         searchView.renderResult(state.search.result, gotoPage)
     }
 });
+
+const controlRecipe = () => {
+    console.log(window.location.hash.replace('#', ''));
+};
+window.addEventListener('hashchange', controlRecipe);
