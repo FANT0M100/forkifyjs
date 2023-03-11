@@ -20,7 +20,7 @@ const contorlSearch = async () => {
 
         //3)clear input value
         searchView.clearInput();
-        
+
         //clear searchList
         searchView.clearResult();
 
@@ -74,6 +74,7 @@ const controlRecipe = async () => {
         
         try {
             await state.recipe.getRecipe();
+            state.recipe.parseIngredients();
 
             //calc time and servings
             state.recipe.calcTime();
@@ -92,3 +93,4 @@ const controlRecipe = async () => {
 };
 
 window.addEventListener('hashchange', controlRecipe);
+window.addEventListener('load', controlRecipe);
