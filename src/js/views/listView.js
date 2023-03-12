@@ -1,6 +1,6 @@
 import { elements } from "./base";
 
-export const clearShopping = () => elements.shooping.innerHTML = ''; 
+export const clearShooping = () => elements.shooping.innerHTML = ''; 
 
 export const renderItem = item => {
     const markup = `

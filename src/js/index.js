@@ -103,7 +103,8 @@ const controllerList = () => {
     //crete new list
     state.list = new List();
     
-    listView.clearShopping();
+    //clear shoping list
+    listView.clearShooping();
 
     //add ingredients
     state.recipe.ingredients.forEach(ing => {
