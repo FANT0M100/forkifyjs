@@ -1,9 +1,11 @@
 // Global app controller
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
+import * as listView from './views/listView';
 import { clerLoader, elements, renderLoader } from "./views/base";
 import Search from './models/search';
 import Recipe from './models/recipe';
+import List from './models/list';
 
 
 const state = {};
@@ -94,3 +96,41 @@ const controlRecipe = async () => {
 
 window.addEventListener('hashchange', controlRecipe);
 window.addEventListener('load', controlRecipe);
+
+
+/*shooping list controler */
+const controllerList = () => {
+    //crete new list
+    state.list = new List();
+    
+    listView.clearShopping();
+
+    //add ingredients
+    state.recipe.ingredients.forEach(ing => {
+        const item = state.list.addItems(ing.count, ing.unit, ing.ingredient);
+        listView.renderItem(item);
+    });
+}; 
+
+
+/* heandling recipe button click (minus, plus, like, addshoping)*/
+elements.recipe.addEventListener('click', e => {
+
+    if(e.target.matches('.btn-decrease, .btn-decrease *')) {
+        //decrease btn click
+        if(state.recipe.servings > 1) {
+            state.recipe.updateServings('dec');
+            recipeView.updateServingsIngredients(state.recipe);
+        }
+    }else if(e.target.matches('.btn-increase, .btn-increase *')) {
+        //increase btn click
+        state.recipe.updateServings('inc');
+        recipeView.updateServingsIngredients(state.recipe);
+    }else if(e.target.matches('.recipe__love, .recipe__love *')) {
+        //click love btn
+        console.log('love');
+    }else if(e.target.matches('.recipe__btn__add, .recipe__btn__add *')) {
+        //click add shoping btn
+        controllerList();
+    }
+});

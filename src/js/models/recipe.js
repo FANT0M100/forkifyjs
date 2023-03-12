@@ -83,11 +83,18 @@ export default class Recipe {
                     ingredient
                 }
             }
-
             return objIng;
         });
-
         this.ingredients = newIngredients;
+    };
 
+    updateServings(type){
+        //servings
+        const newServing = type === 'dec' ? this.servings - 1 : this.servings + 1;
+
+        //ingredients
+        this.ingredients.forEach(ing => ing.count *= (newServing / this.servings));
+
+        this.servings = newServing;
     };
 };
