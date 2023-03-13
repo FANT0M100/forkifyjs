@@ -72,6 +72,9 @@ const controlRecipe = async () => {
         //prepare UI
         renderLoader(elements.recipe);
 
+        //higlight selected search item
+        state.search && searchView.higlightSelected(id)
+        //create new recipe object
         state.recipe = new Recipe(id);
         
         try {
@@ -112,6 +115,22 @@ const controllerList = () => {
         listView.renderItem(item);
     });
 }; 
+
+//handle delete and update list item (add shooping)
+elements.shooping.addEventListener('click', e => {
+    const id = e.target.closest('.shopping__item').dataset.itemid;
+    
+    if(e.target.matches('.shopping__delete, .shopping__delete *')) {
+        //delete item
+        state.list.deleteItems(id);
+        //delete from UI
+        listView.deleteItem(id);
+    }else if(e.target.matches('.shopping__count-value, .shopping__count-value *')) {
+        //update count
+        const val = +e.target.value;
+        state.list.updateCount(id, val); 
+    }
+});
 
 
 /* heandling recipe button click (minus, plus, like, addshoping)*/
